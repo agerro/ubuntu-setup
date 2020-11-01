@@ -1,0 +1,16 @@
+- name: Add Google apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Update repositories cache and install "kubectl" package
+  apt:
+    name: kubectl
+    state: present
+    update_cache: yes
+
+- name: Update repositories cache and install "kubectx" package
+  apt:
+    name: kubectx
+    state: present
+    update_cache: yes
