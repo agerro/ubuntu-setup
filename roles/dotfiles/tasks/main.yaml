@@ -9,4 +9,4 @@
 - name: Copy dotfiles
   copy:
     src: "{{ role_path }}/files/*"
-    dest: "~/.zsh_sources
+    dest: "~/

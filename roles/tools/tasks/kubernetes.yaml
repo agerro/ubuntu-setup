@@ -1,16 +1,43 @@
 - name: Add Google apt key
+  become: yes
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
 
-- name: Update repositories cache and install "kubectl" package
-  apt:
-    name: kubectl
-    state: present
-    update_cache: yes
+- name: Download kubectl
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl
+    dest: /tmp/ansible-downloads
+    mode: '0755'
 
-- name: Update repositories cache and install "kubectx" package
-  apt:
-    name: kubectx
-    state: present
-    update_cache: yes
+- name: Install Terraform
+  become: yes
+  copy:
+    src: /tmp/ansible-downloads/kubectl
+    dest: /usr/local/bin/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: Download kubectx
+  git:
+    repo: ssh://git@github.com/ahmetb/kubectx.git
+    dest: /tmp/ansible-downloads/kubectx
+
+- name: Install kubectx
+  become: yes
+  copy:
+    src: /tmp/ansible-downloads/kubectx/kubectx
+    dest: /usr/local/bin/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: Install kubens
+  become: yes
+  copy:
+    src: /tmp/ansible-downloads/kubectx/kubens
+    dest: /usr/local/bin/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'

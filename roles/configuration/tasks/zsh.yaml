@@ -1,0 +1,6 @@
+- name: Update repositories cache and install "zsh"
+  become: yes 
+  apt:
+    name: zsh
+    state: present
+    update_cache: yes

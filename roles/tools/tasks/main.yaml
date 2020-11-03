@@ -1,3 +1,11 @@
-- import_tasks: system.yaml
-- import_tasks: security.yaml
-- import_tasks: dotfiles.yaml
+- name: Create folder for downloads
+  file:
+    path: /tmp/ansible-downloads
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- import_tasks: cloud.yaml
+- import_tasks: docker.yaml
+- import_tasks: kubernetes.yaml

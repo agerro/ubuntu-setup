@@ -1,0 +1,24 @@
+- name: Download AWS CLI
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/ansible-downloads
+    remote_src: yes
+
+- name: Install (or update) AWS CLI
+  become: yes
+  command: /tmp/ansible-downloads/aws/install --update
+
+- name: Download Terraform
+  unarchive:
+    src: https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip
+    dest: /tmp/ansible-downloads
+    remote_src: yes
+
+- name: Install Terraform
+  become: yes
+  copy:
+    src: /tmp/ansible-downloads/terraform
+    dest: /usr/local/bin/
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
