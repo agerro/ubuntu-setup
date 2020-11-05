@@ -1,7 +1,8 @@
 - hosts: 127.0.0.1
   connection: local
   roles:
-    - configuration 
     - applications
+    - dotfiles
+    - configuration
     - tools
     - dotfiles
