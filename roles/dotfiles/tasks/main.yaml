@@ -8,5 +8,5 @@
 
 - name: Copy dotfiles
   copy:
-    src: "{{ role_path }}/files/*"
-    dest: "~/
+    src: "{{ role_path }}/files/"
+    dest: "~/"

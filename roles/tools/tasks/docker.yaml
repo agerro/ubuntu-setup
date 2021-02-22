@@ -27,7 +27,7 @@
   block:
     - name: get user 
       command: whoami
-        register: current_user
+      register: current_user
     - name: add user to group docker
       user:
         name: "{{ current_user.stdout }}"
